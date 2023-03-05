@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "question6",
+            "request": "launch",
+            "mainClass": "question6",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Project.mypackage.Main",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
             "name": "findAndReplace",
             "request": "launch",
             "mainClass": "findAndReplace",

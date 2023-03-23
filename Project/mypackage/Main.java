@@ -6,6 +6,8 @@ import Project.mypackage.util.NumberToWordsUtil;
 
 public class Main {
     public static void main(String[] args) {
+
+
         String fullName = "John Doe";
         String shortName = ShortNameUtil.getShortName(fullName);
         System.out.println("Short name: " + shortName);

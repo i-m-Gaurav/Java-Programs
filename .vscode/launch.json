@@ -6,6 +6,118 @@
     "configurations": [
         {
             "type": "java",
+            "name": "question7",
+            "request": "launch",
+            "mainClass": "question7",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "contactio",
+            "request": "launch",
+            "mainClass": "contactio",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "question4",
+            "request": "launch",
+            "mainClass": "question4",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "Contactmanager",
+            "request": "launch",
+            "mainClass": "Contactmanager",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "findAndReplace",
+            "request": "launch",
+            "mainClass": "findAndReplace",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "question5",
+            "request": "launch",
+            "mainClass": "question5",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "test",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "PrintTableN",
+            "request": "launch",
+            "mainClass": "PrintTableN",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "test",
+            "request": "launch",
+            "mainClass": "Project.mypackage.test",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "question2",
+            "request": "launch",
+            "mainClass": "question2",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "connection",
+            "request": "launch",
+            "mainClass": "connection",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "MyConnection",
+            "request": "launch",
+            "mainClass": "JDBCHW.MyConnection",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "mycon",
+            "request": "launch",
+            "mainClass": "JDBCHW.mycon",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "conn",
+            "request": "launch",
+            "mainClass": "JDBCHW.conn",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
+            "name": "conn",
+            "request": "launch",
+            "mainClass": "conn",
+            "projectName": "Java_5745b8e5"
+        },
+        {
+            "type": "java",
             "name": "question6",
             "request": "launch",
             "mainClass": "question6",

@@ -1,34 +1,39 @@
-import java.io.*;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.Scanner;
 
 public class findAndReplace {
-    public static void main(String[] args) {
-        try {
-            // Open the file in "rw" mode
-            RandomAccessFile file = new RandomAccessFile("filename.txt", "rw");
-
-            // Read the contents of the file into a byte array
-            byte[] content = new byte[(int) file.length()];
-            file.readFully(content);
-
-            // Convert the byte array to a string
-            String text = new String(content);
-
-            // Find and replace the characters/words
-            text = text.replaceAll("hola", "newtext");
-
-            // Convert the string back to a byte array
-            content = text.getBytes();
-
-            // Reset the file pointer to the beginning of the file
-            file.seek(0);
-
-            // Write the modified content back to the file
-            file.write(content);
-
-            // Close the file
-            file.close();
-
-            System.out.println("Replaced successfully!");
+    public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        
+        String path = "C:\\Users\\Gaurav kumar\\Desktop\\Java\\2ndAssignment\\replace.txt";
+        
+        try (RandomAccessFile raf = new RandomAccessFile(path, "rw")) {
+            System.out.print("Enter the string to search: ");
+            String searchString = scanner.nextLine();
+            
+            System.out.print("Enter the string to replace: ");
+            String replaceString = scanner.nextLine();
+            
+            boolean found = false;
+            long pos = 0;
+            while (raf.getFilePointer() < raf.length()) {
+                String line = raf.readLine();
+                if (line.contains(searchString)) {
+                    found = true;
+                    String newLine = line.replaceAll(searchString, replaceString);
+                    raf.seek(pos);
+                    raf.writeBytes(newLine);
+                    break;
+                }
+                pos = raf.getFilePointer();
+            }
+            
+            if (found) {
+                System.out.println("String replaced successfully.");
+            } else {
+                System.out.println("String not found in file.");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

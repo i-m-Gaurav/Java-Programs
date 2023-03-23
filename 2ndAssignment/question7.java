@@ -1,6 +1,6 @@
 public class question7 implements Runnable {
 
-    
+    // printing message in proper way
     
     public void run() {
 

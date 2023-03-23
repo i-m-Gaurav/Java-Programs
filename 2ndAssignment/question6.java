@@ -1,39 +1,57 @@
+import java.util.Scanner;
 
+class PrintNumbers implements Runnable {
+    private int id;
+    private int lower;
+    private int higher;
 
-public class question6 {
-    public static void main(String[] args) {
-        // get user input for lower and upper limits
-        int lowerLimit = Integer.parseInt(System.console().readLine("Enter lower limit: "));
-        int upperLimit = Integer.parseInt(System.console().readLine("Enter upper limit: "));
+    private static Object lock = new Object();
+    private static int current = 1;
 
-        // create two objects to print numbers
-        PrintNumbers pn1 = new PrintNumbers(lowerLimit, upperLimit/2);
-        PrintNumbers pn2 = new PrintNumbers(upperLimit/2 + 1, upperLimit);
+    public PrintNumbers(int id, int lower, int higher) {
+        this.id = id;
+        this.lower = lower;
+        this.higher = higher;
+        current = lower;
+    }
 
-        // create two threads and start them
-        Thread thread1 = new Thread(pn1);
-        Thread thread2 = new Thread(pn2);
-
-        thread1.start();
-        thread2.start();
+    @Override
+    public void run() {
+        synchronized (lock) {
+            while (current <= higher) {
+                if (current % 2 == id) {
+                    System.out.println(Thread.currentThread().getName() + " prints " + current);
+                    current++;
+                    lock.notifyAll();
+                } else {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+            lock.notifyAll();
+        }
     }
 }
 
-class PrintNumbers implements Runnable {
-    
-    
-    private int lowerLimit;
-    private int upperLimit;
+public class question6 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-    public PrintNumbers(int lowerLimit, int upperLimit) {
-        this.lowerLimit = lowerLimit;
-        this.upperLimit = upperLimit;
+        System.out.print("Enter the lower limit: ");
+        int lower = scanner.nextInt();
+        System.out.print("Enter the higher limit: ");
+        int higher = scanner.nextInt();
+
+        PrintNumbers evenPrinter = new PrintNumbers(0, lower, higher);
+        PrintNumbers oddPrinter = new PrintNumbers(1, lower, higher);
+
+        Thread evenThread = new Thread(evenPrinter, "Even Thread");
+        Thread oddThread = new Thread(oddPrinter, "Odd Thread");
+
+        evenThread.start();
+        oddThread.start();
     }
-
-    public void run() {
-        for (int num = lowerLimit; num <= upperLimit; num++) {
-            System.out.println(num);
-        }
-    }
-
 }

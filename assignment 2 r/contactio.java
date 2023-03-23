@@ -1,33 +1,35 @@
+
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-class Contactmanager {
+class contactio {
     //function to show name and contact no.
     public static void nam_no() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("contact.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("test.txt"));
             String s;
             int i;
             while ((s = br.readLine()) != null) {
                 String[] arr = s.split("##");
-                System.out.print(arr[0] + "----");
+                System.out.print(arr[0] + "    ");
                 for (i = 1; i < arr.length; i++) {
-                    System.out.print(arr[i] + " ");
+                    System.out.print(arr[i] + "  ");
                 }
 
                 System.out.println();
             }
             br.close();
         } catch (Exception e) {
-            System.out.print("Error in opening file");
+            e.printStackTrace();
         }
     }
 
     //function to show name and no of contact
     public static void nam_count() {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("contact.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("test.txt"));
             String s;
             int i;
             while ((s = br.readLine()) != null) {
@@ -40,62 +42,90 @@ class Contactmanager {
         }
     }
 
-    // FUNCTION TO ADD NEW CONTACT IF THE NAME IS ALREADY PRESENT
-            
-    public static void add_contact() {  
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("contact.txt"));
-            BufferedWriter bw = new BufferedWriter(new FileWriter("contact_temp.txt", true));
-            Scanner in = new Scanner(System.in);
-            System.out.print("Enter contact Name: ");
-            String name = in.next();
-            System.out.print("Enter contact number: ");
-            String number = in.next();
-            String line;
-            boolean found = false;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("##");
-                if (parts[0].equals(name)) {
-                    // Contact already exists, append the new phone number
-                    line += "," + number;
-                    found = true;
+    //function to add new contact 
+    /*  public static void cont_add()
+    {
+        try{
+            //BufferedReader br = new BufferedReader(new FileReader("test.txt"));
+            RandomAccessFile raf=new RandomAccessFile("test.txt","rw");
+            Scanner in =new Scanner(System.in);
+            System.out.print("Enter name to add contact");
+            String nam=in.next();
+            String s,str;
+            int i;
+            while(true)
+            {
+                long p=raf.getFilePointer();
+                s=raf.readLine();
+                if(s==null)
+                {
+                    break;
                 }
-                bw.write(line + "\n");
+                p+=s.length();
+                String[] arr=s.split("##");
+                if(nam.equalsIgnoreCase(arr[0]))
+                {
+                    System.out.print("Enter contact: ");
+                    str=in.next();
+                    raf.seek(p);
+                    System.out.println(p);
+                    raf.writeBytes(System.getProperty("line.separator"));
+                    raf.writeBytes("##");
+                    raf.seek(p+2);
+                    raf.writeBytes(str);
+                   // arr[arr.length-1] += "##";
+                   // arr[arr.length-1] += str;
+                    //bw.write();
+                    break;
+                }
+                else{
+                    //raSystem.out.print("Enter not matched");
+                }
             }
+        }
+        catch(Exception e)
+        {
+    
+        }
+    
+            
+    }*/
+    //function to add new contact
+    public static void add_contact() {
+        try {
+            BufferedWriter br = new BufferedWriter(new FileWriter("test.txt", true));
+            Scanner in = new Scanner(System.in);
+            System.out.print("Enter contact Name :");
+            String s = in.next();
+            s += "##";
+            System.out.print("Enter contact number :");
+            String n = in.next();
+            s += n;
+            br.write("\n" + s);
             br.close();
-            if (!found) {
-                // Contact doesn't exist, create a new entry
-                bw.write(name + "##" + number + "\n");
-            }
-            bw.close();
-            // Rename the temporary file to the original file
-            File file = new File("contact.txt");
-            file.delete();
-            new File("contact_temp.txt").renameTo(file);
             System.out.println("Contact added");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-
 
     //function to delete contact
-    public static void delete_con() {
+    public static void delete_con()
+    {
         // Get the name of the contact to be deleted from the user
         Scanner in = new Scanner(System.in);
         System.out.print("Enter the name of the contact to be deleted: ");
         String contactName = in.next();
 
-        // Read the contents of the file into an ArrayList
+// Read the contents of the file into an ArrayList
         ArrayList<String> contacts = new ArrayList<String>();
         try {
-            File file = new File("contact.txt");
+            File file = new File("test.txt");
             Scanner fileScanner = new Scanner(file);
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
                 if (line.startsWith(contactName + "##")) {
-                    continue; // skip the line that contains the contact to be deleted
+                    continue;  // skip the line that contains the contact to be deleted
                 }
                 contacts.add(line);
             }
@@ -108,7 +138,7 @@ class Contactmanager {
 
         // Write the updated list of contacts to the file
         try {
-            FileWriter fileWriter = new FileWriter("contact.txt");
+            FileWriter fileWriter = new FileWriter("test.txt");
             for (String contact : contacts) {
                 fileWriter.write(contact + "\n");
             }

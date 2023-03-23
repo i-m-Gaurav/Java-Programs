@@ -1,6 +1,6 @@
 import java.util.Scanner;
-// program to print the table using two threads...
-public class question5 {
+
+public class PrintTableN {
     static int num = 1;
     static Object lock = new Object();
 
